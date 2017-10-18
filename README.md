@@ -79,11 +79,36 @@ function log(target,name,descriptor){
 
 ```
 
+## 不能用于函数
+因为存在函数提升
+```
+var counter = 0;
+var add = function () {
+  counter++;
+};
+@add
+function foo() {
+}
+```
+函数提升会变成下面的样子
+```
+@add
+function foo() {
+}
+var counter;
+var add;
+counter = 0;
+add = function () {
+  counter++;
+};
+```
+
+
 ## core-decorators.js
 core-decorators.js是一个第三方模块，提供了几个常见的修饰器，通过它可以更好地理解修饰器
-@autobind
-@readonly
-@override
-@deprecate (别名@deprecated)
-@suppressWarnings
+* @autobind
+* @readonly
+* @override
+* deprecate (别名@deprecated)
+* @suppressWarnings
 
